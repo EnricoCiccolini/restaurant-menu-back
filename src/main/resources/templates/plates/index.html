@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" />
+    <title>menu</title>
+</head>
+
+<body>
+    <th:block th:replace="~{fragments/fragment :: navbar}"></th:block>
+
+
+
+
+    <div class="container">
+
+        <h1> menu del giorno</h1>
+
+
+
+        <a th:href="@{/plates/create}" class="btn btn-success">aggiungi un nuovo piatto</a>
+
+
+        <div class="container" th:if="${plates.size() > 0}">
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">id </th>
+                        <th scope="col">name </th>
+                        <th scope="col">description</th>
+                        <th scope="col">image</th>
+                        <th scope="col"> price </th>
+                        <th scope="col">info</th>
+                        <th scope="col">---</th>
+                        <th scope="col">---</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="plate :${plates}" th:object="${plate}">
+                        <td>[[*{id}]]</td>
+                        <td>[[*{name}]]</td>
+                        <td>[[*{description}]]</td>
+                        <td><img th:src="*{image}" alt=[[*{name}]] style="max-width: 150px;"></td>
+                        <td>[[*{price}]] $</td>
+
+                        <td><a class="btn btn-primary " th:href="@{/plates/{id}(id=*{id})}">dettails</a>
+                        </td>
+                        <td><a class="btn btn-warning " th:href="@{/plates/edit/{id}(id=*{id})}">modify</a></td>
+                        <td>
+
+
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                th:data-bs-target="'#delete-modal-'+${plate.id}">
+                                delete
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" th:id="'delete-modal-' + ${plate.id}" tabindex="-1"
+                                aria-labelledby="delete-modal" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5">deleting plate "[[${plate.name}]] ?"</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h3>Once deleted the data will be lost</h3>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">no</button>
+                                            <form action="" th:action="@{/plates/delete/{id}(id=*{id})}" method="post">
+                                                <button type="submit" class="btn btn-danger ">yes</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+        <div class="container" th:unless="${plates.size() > 0}">
+            <h2>menu in aggiornamento </h2>
+        </div>
+    </div>
+    <script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>

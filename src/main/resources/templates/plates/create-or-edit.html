@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" />
+    <title>Document</title>
+</head>
+
+<body>
+    <th:block th:replace="~{fragments/fragment :: navbar}"></th:block>
+    <div class="container">
+
+        <h1 th:text="${edit ? 'edit' : 'create'}"></h1>
+
+        <form id="plateform" th:action="${edit ? '/plates/edit/' + plate.id : '/plates/create'}" method="post"
+            th:object="${plate}">
+
+            <div class="mb-3">
+                <label class="form-label" for="name">name : </label>
+                <input class="form-control" type="text" id="name" th:field="*{name}" th:errorClass="is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}">
+                    <ul>
+                        <li th:each="error : ${#fields.errors('name') }" th:text="${error}"></li>
+                    </ul>
+
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <h4>portata</h4>
+                <div class="plates-input form-check">
+                    <select class="form-select" th:field="*{course}" id="course-chose">
+                        <option value="" selected disabled>Seleziona una portata</option>
+                        <option th:each="course : ${courses}" th:value="${course.id}" th:text="${course.name}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <!-- //////////// -->
+
+
+            <div class="mb-3">
+                <h4>allergeni</h4>
+                <div class="single-allergeny form-check" th:each="allergen :${allergens}">
+                    <input type="checkbox" th:id="|allergen + ${allergen.id}|" th:field="*{allergens}"
+                        th:value="${allergen.id}">
+                    <label class="form-check-label" th:for="|allergen-${allergen.id}|">[[${allergen.name}]]</label>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="description">description: </label>
+                <textarea class="form-control" type="long-text" id="description" th:field="*{description}"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="image"> link image: </label>
+                <input class="form-control" type="text" id="image" th:field="*{image}">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="price"> price: </label>
+                <input class="form-control" type="number" step="0.01" id="price" min="0" th:field="*{price}"
+                    th:errorClass="is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('price')}">
+                    <ul>
+                        <li th:each="error : ${#fields.errors('price') }" th:text="${error}"></li>
+                    </ul>
+
+                </div>
+            </div>
+            <div class="mb-3 justify-content-between">
+
+                <input type="submit" class="btn btn-primary" value="create plate">
+
+                <input type="reset" class="btn btn-warning" value="reset all">
+
+            </div>
+
+        </form>
+    </div>
+</body>
+
+</html>
