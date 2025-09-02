@@ -16,11 +16,11 @@
 
     <div class="container">
 
-        <h1> menu del giorno</h1>
+        <h1> menu of the day</h1>
 
 
 
-        <a th:href="@{/plates/create}" class="btn btn-success">aggiungi un nuovo piatto</a>
+        <a th:href="@{/plates/create}" class="btn btn-success">add a new plate</a>
 
 
         <div class="container" th:if="${plates.size() > 0}">
@@ -92,7 +92,7 @@
             </table>
         </div>
         <div class="container" th:unless="${plates.size() > 0}">
-            <h2>menu in aggiornamento </h2>
+            <h2>menu being updated </h2>
         </div>
     </div>
     <script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>

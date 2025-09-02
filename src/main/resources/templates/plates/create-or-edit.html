@@ -29,10 +29,10 @@
             </div>
 
             <div class="mb-3">
-                <h4>portata</h4>
+                <h4>course</h4>
                 <div class="plates-input form-check">
                     <select class="form-select" th:field="*{course}" id="course-chose">
-                        <option value="" selected disabled>Seleziona una portata</option>
+                        <option value="" selected disabled>Select a course</option>
                         <option th:each="course : ${courses}" th:value="${course.id}" th:text="${course.name}">
                         </option>
                     </select>

@@ -1,7 +1,6 @@
 package org.lesson.java.menu.restaurant_menu.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.lesson.java.menu.restaurant_menu.model.Course;
 import org.lesson.java.menu.restaurant_menu.service.CourseService;
