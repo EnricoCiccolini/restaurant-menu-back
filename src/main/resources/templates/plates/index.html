@@ -20,7 +20,7 @@
 
 
 
-        <a th:href="@{/plates/create}" class="btn btn-success">add a new plate</a>
+        <a th:href="@{/plates/create}" sec:authorize="hasAuthority('ADMIN')" class="btn btn-success">add a new plate</a>
 
 
         <div class="container" th:if="${plates.size() > 0}">
@@ -34,8 +34,8 @@
                         <th scope="col">image</th>
                         <th scope="col"> price </th>
                         <th scope="col">info</th>
-                        <th scope="col">---</th>
-                        <th scope="col">---</th>
+                        <th sec:authorize="hasAuthority('ADMIN')" scope="col">---</th>
+                        <th sec:authorize="hasAuthority('ADMIN')" scope="col">---</th>
 
                     </tr>
                 </thead>
@@ -49,8 +49,9 @@
 
                         <td><a class="btn btn-primary " th:href="@{/plates/{id}(id=*{id})}">dettails</a>
                         </td>
-                        <td><a class="btn btn-warning " th:href="@{/plates/edit/{id}(id=*{id})}">modify</a></td>
-                        <td>
+                        <td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-warning "
+                                th:href="@{/plates/edit/{id}(id=*{id})}">modify</a></td>
+                        <td sec:authorize="hasAuthority('ADMIN')">
 
 
                             <!-- Button trigger modal -->

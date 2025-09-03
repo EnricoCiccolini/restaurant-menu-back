@@ -21,18 +21,20 @@
                 <div class="navbar-nav">
                     <a class="nav-link active" aria-current="page" href="http://localhost:8080">Home</a>
                     <a class="nav-link" href="http://localhost:8080/plates">menu</a>
-                    <a class="nav-link" href="http://localhost:8080/allergens">allergen</a>
-                    <a class="nav-link" href="http://localhost:8080/courses">course</a>
+                    <a class="nav-link" sec:authorize="hasAuthority('ADMIN')"
+                        href="http://localhost:8080/allergens">allergen</a>
+                    <a class="nav-link" sec:authorize="hasAuthority('ADMIN')"
+                        href="http://localhost:8080/courses">course</a>
 
                 </div>
             </div>
         </div>
 
-        <!-- <div class="user-info">
+        <div class="user-info">
             Logged user: <span sec:authentication="name" class="fw-bold me-2"> </span>
             Role <span sec:authentication="principal.authorities" class="fst-italic me-2"></span>
             <a class="btn btn-sm btn-outline-primary" href="/logout"> Sign out</a>
-        </div> -->
+        </div>
     </nav>
 </header>
 

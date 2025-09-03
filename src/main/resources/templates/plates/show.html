@@ -23,6 +23,28 @@
                 <p class="card-text">[[*{description}]]</p>
                 <p class="card-text">[[*{price}]] $</p>
             </div>
+
+            <table class="table" th:if="${plate.getAllergens().size()>0}">
+                <thead>
+                    <tr>
+                        <th scope="col">Id </th>
+                        <th scope="col">name </th>
+                        <th scope="col">image</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="allergen : ${plate.allergens}">
+                        <td>[[${allergen.id}]]</td>
+                        <td>[[${allergen.name}]]</td>
+                        <td><img th:src="${allergen.image}" alt=[[*{name}]] class="card-img-top"
+                                style="max-width: 70px;"></td>
+
+                    </tr>
+
+
+                </tbody>
+            </table>
         </div>
 
 
